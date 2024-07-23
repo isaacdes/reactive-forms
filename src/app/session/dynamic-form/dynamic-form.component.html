@@ -1,0 +1,47 @@
+<form [formGroup]="myForm" class="mt-2">
+  <div class="alert alert-success text-center">Dyanmic Form</div>
+
+  {{ myForm.value | json }}
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      placeholder="Enter name"
+      formControlName="name"
+    />
+  </div>
+
+  <div class="" formArrayName="phones">
+    <div
+      class=" "
+      *ngFor="let phone of phonesForm.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <span>Phone</span>
+      <div class="d-flex">
+        <label for="exampleInputEmail1">Code</label>
+        <input type="text" class="form-control" formControlName="code" />
+        <label for="exampleInputEmail1">Number</label>
+        <input type="text" class="form-control" formControlName="number" />
+      </div>
+      <button type="button" (click)="deletePhone(i)" class="btn btn-danger">
+        Delete
+      </button>
+    </div>
+  </div>
+
+  <button type="button" (click)="addPhone()" class="btn btn-primary">
+    Add Phone
+  </button>
+
+  <p-dropdown
+    formControlName="selectedCity"
+    [options]="cities"
+    optionLabel="name"
+    placeholder="Select a City"
+  />
+</form>
